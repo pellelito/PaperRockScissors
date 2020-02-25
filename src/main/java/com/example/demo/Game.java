@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,5 +74,12 @@ public class Game {
 	public String getScoreBean() {
 		String pattern = "{\"Player 1\":\"%s\", \"Player 2\":\"%s\", \"ties\": \"%s\"}";
 		return String.format(pattern, ScoreKeeper.WINS, ScoreKeeper.LOSSES, ScoreKeeper.TIES);
+	}
+	@RequestMapping(value = "/time", method = RequestMethod.GET)
+	public String getTime() {
+		   DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");  
+		   LocalDateTime now = LocalDateTime.now();  
+		  
+		return dtf.format(now);
 	}
 }
